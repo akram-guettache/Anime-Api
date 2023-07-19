@@ -1,0 +1,387 @@
+openapi: 3.0.0
+info:
+  title: Anime Api
+  contact: {}
+  version: "1.0"
+servers:
+  - url: https://anime-api-aiup.onrender.com/api/v1
+    variables: {}
+paths:
+  /auth/register:
+    post:
+      tags:
+        - Auth
+      summary: Register
+      operationId: Register
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/RegisterRequest"
+                - example:
+                    name: AnyName
+                    email: example@example.com
+                    password: password
+            example:
+              name: AnyName
+              email: example@example.com
+              password: password
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security: []
+  /auth/login:
+    post:
+      tags:
+        - Auth
+      summary: Login
+      operationId: Login
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/LoginRequest"
+                - example:
+                    email: any@example.com
+                    password: anypass
+            example:
+              email: example@example.com
+              password: anypass
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security: []
+  /forgot-password:
+    post:
+      tags:
+        - Auth
+      summary: Forgot Password
+      operationId: ForgotPassword
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security: []
+  /auth/logout:
+    get:
+      tags:
+        - Auth
+      summary: Logout
+      description: ""
+      operationId: Logout
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+  /anime:
+    get:
+      tags:
+        - Anime
+      summary: Get All Animes
+      operationId: GetAllAnimes
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security: []
+    post:
+      tags:
+        - Anime
+      summary: Add Anime (Admin Only)
+      operationId: AddAnime(AdminOnly)
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+  /anime/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: The Anime ID
+    get:
+      tags:
+        - Anime
+      summary: Get Single Anime
+      operationId: GetSingleAnime
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security: []
+    patch:
+      tags:
+        - Anime
+      summary: Update Anime (Admin Only)
+      operationId: UpdateAnime(AdminOnly)
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+    delete:
+      tags:
+        - Anime
+      summary: Delete Anime (Admin Only)
+      operationId: DeleteAnime(AdminOnly)
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+  /episode:
+    get:
+      tags:
+        - Episode
+      summary: Get All Episodes
+      operationId: GetAllEpisodes
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security: []
+    post:
+      tags:
+        - Episode
+      summary: Add Episode (Admin Only)
+      operationId: AddEpisode(AdminOnly)
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/AddEpisodeAdminOnlyRequest"
+                - example:
+                    episodetitle: "episode Traitor "
+                    episodenumber: 6
+                    episodelinks:
+                      - link1
+                      - link2
+                    anime: 641a172d04e2678209afa4df
+            example:
+              episodetitle: "episode Traitor "
+              episodenumber: 6
+              episodelinks:
+                - link1
+                - link2
+              anime: 641a172d04e2678209afa4df
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+
+  /episode/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: The Episode ID
+    get:
+      tags:
+        - Episode
+      summary: Get Single Episode
+      operationId: GetSingleEpisode
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security: []
+    delete:
+      tags:
+        - Episode
+      summary: Delete Episode (Admin Only)
+      operationId: DeleteEpisode(AdminOnly)
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+    patch:
+      tags:
+        - Episode
+      summary: Update Episode (Admin Only)
+      operationId: UpdateEpisode(AdminOnly)
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+  /user/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: The Anime ID
+    delete:
+      tags:
+        - User
+      summary: Delete From Favourites
+      operationId: DeleteFromFavourites
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+  /user/favourites:
+    get:
+      tags:
+        - User
+      summary: Get Favourites
+      operationId: GetFavourites
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+    post:
+      tags:
+        - User
+      summary: Add To Favourites
+      operationId: AddToFavourites
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/AddToFavouritesRequest"
+                - example:
+                    animeId: 641a172d04e2678209afa4e8
+            example:
+              animeId: 641a172d04e2678209afa4e8
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+components:
+  schemas:
+    RegisterRequest:
+      title: RegisterRequest
+      required:
+        - name
+        - email
+        - password
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        name: Rechtoffen
+        email: jesuisgratin@gmail.com
+        password: MohaLOL123
+    LoginRequest:
+      title: LoginRequest
+      required:
+        - email
+        - password
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        email: jesuisgratin@gmail.com
+        password: MohaLOL123
+    AddEpisodeAdminOnlyRequest:
+      title: AddEpisodeAdminOnlyRequest
+      required:
+        - episodetitle
+        - episodenumber
+        - episodelinks
+        - anime
+      type: object
+      properties:
+        episodetitle:
+          type: string
+        episodenumber:
+          type: integer
+          format: int32
+        episodelinks:
+          type: array
+          items:
+            type: string
+          description: ""
+        anime:
+          type: string
+      example:
+        episodetitle: "episode Traitor "
+        episodenumber: 6
+        episodelinks:
+          - link1
+          - link2
+        anime: 641a172d04e2678209afa4df
+    AddToFavouritesRequest:
+      title: AddToFavouritesRequest
+      required:
+        - animeId
+      type: object
+      properties:
+        animeId:
+          type: string
+      example:
+        animeId: 641a172d04e2678209afa4e8
+  securitySchemes:
+    httpBearer:
+      type: http
+      scheme: bearer
+security:
+  - httpBearer: []
+tags:
+  - name: Auth
+    description: ""
+  - name: Anime
+    description: ""
+  - name: Episode
+    description: ""
+  - name: User
+    description: ""
