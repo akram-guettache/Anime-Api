@@ -12,7 +12,7 @@ const getEpisode = async (req, res) => {
   if (!episode) {
     throw new NotFoundError(`No Anime With The Following ID: ${episode}`);
   }
-  res.json({ episode });
+  res.status(StatusCodes.OK).json({ episode });
 };
 
 const updateEpisode = async (req, res) => {
@@ -28,7 +28,7 @@ const updateEpisode = async (req, res) => {
   if (!episode) {
     throw new NotFoundError(`No Anime With The Following ID : ${id}`);
   }
-  res.status(StatusCodes.OK).json(episode);
+  res.status(StatusCodes.OK).status(StatusCodes.OK).json(episode);
 };
 
 const addEpisode = async (req, res) => {
@@ -38,7 +38,7 @@ const addEpisode = async (req, res) => {
     throw new BadRequestError("You Are Not Allowed To Make This Task");
   }
   const episode = await (await Episode.create(req.body)).populate("anime");
-  res.json(episode);
+  res.status(StatusCodes.CREATED).json(episode);
 };
 
 const deleteEpisode = async (req, res) => {
@@ -49,7 +49,7 @@ const deleteEpisode = async (req, res) => {
   }
   await Episode.findByIdAndRemove({ _id: id });
   res
-    .status(200)
+    .status(StatusCodes.OK)
     .send(`Successfully deleted Episode With The Following ID: ${id}`);
 };
 

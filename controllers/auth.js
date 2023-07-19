@@ -73,7 +73,7 @@ const login = async (req, res) => {
   });
   res
     .status(StatusCodes.OK)
-    .json({ user: { name: user.name, email: user.email, token: token } });
+    .json({ user: { name: user.name, email: user.email } });
 };
 const ForgotPassword = async (req, res) => {
   const { email } = req.body;

@@ -16,7 +16,7 @@ const getAllAnimes = async (req, res) => {
     anime.status = status;
   }
   const animes = await Anime.find(anime);
-  res.status(200).json({
+  res.status(StatusCodes.OK).json({
     animes,
   });
 };
@@ -28,7 +28,9 @@ const getAnime = async (req, res) => {
   }
   const episodes = await Episode.find({ anime: id });
 
-  res.status(200).json({ anime, episodes, TotalEpisodes: episodes.length });
+  res
+    .status(StatusCodes.OK)
+    .json({ anime, episodes, TotalEpisodes: episodes.length });
 };
 const addAnime = async (req, res) => {
   const { role } = req.user;
@@ -68,7 +70,7 @@ const deleteAnime = async (req, res) => {
   if (!anime) {
     throw new NotFoundError(`No Anime with the following id ${id}`);
   }
-  res.status(200).send("Anime Deleted Succeffully");
+  res.status(StatusCodes.OK).send("Anime Deleted Succeffully");
 };
 
 const addToFavourites = async (req, res) => {
@@ -85,7 +87,7 @@ const addToFavourites = async (req, res) => {
   }
   user.favourites = [...favourites, animeId];
   await user.save();
-  res.status(200).json({ user });
+  res.status(StatusCodes.CREATED).json({ user });
 };
 
 const RemoveFromFavourites = async (req, res) => {
