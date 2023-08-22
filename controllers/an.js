@@ -87,7 +87,11 @@ const addToFavourites = async (req, res) => {
   }
   user.favourites = [...favourites, animeId];
   await user.save();
-  res.status(StatusCodes.CREATED).json({ user });
+  res
+    .status(StatusCodes.CREATED)
+    .json({
+      msg: `Successfully Added To Your Favourites The Following Anime With Id OF ${animeId} `,
+    });
 };
 
 const RemoveFromFavourites = async (req, res) => {
